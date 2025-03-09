@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Заказы</h1>
+	<table class="table {% if request.cookies.get('theme') == 'dark' %} table-dark {% endif %} table-striped">
+	  <thead>
+  		<tr>
+  		  <th>#</th>
+  		  <th>Описание заказа </th>
+  		  <th>Дата и время размещения заказа</th>
+          <th>Имя клиента</th>
+		  <th>Действия</th>
+  		</tr>
+	  </thead>
+	  <tbody>
+        {% for o in all_orders %}
+  		<tr>
+  		  <td><a href="{{url_for('order_details', id=o.id)}}">{{o.id}}</a></td>
+  		  <td>{{o.order_description}}</td>
+          <td>{{o.date}}</td>
+          <td>{{o.client.name}}</td>
+		  <td>
+			<a class="btn btn-primary" href="{{url_for('change_order', id=o.id)}}">Изменить<i class="bi bi-pencil-square"></i></a>
+			<a class="btn btn-danger" href="{{url_for('delete_order', id=o.id)}}">Удалить<i class="bi bi-trash"></i></a>
+		  </td>
+  		</tr>
+        {% endfor %}
+	  </tbody>
+	</table>
+
+<a class="btn btn-primary" href="{{ url_for('add_order') }}">Разместить заказ</a>
+
+	
+{% endblock %}

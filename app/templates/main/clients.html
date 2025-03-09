@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Клиенты</h1>
+	<table class="table {% if request.cookies.get('theme') == 'dark' %} table-dark {% endif %} table-striped">
+	  <thead>
+  		<tr>
+  		  <th>#</th>
+  		  <th>Имя</th>
+  		  <th>Номер телефона</th>
+          <th>Почта</th>
+		  <th>Действие</th>
+  		</tr>
+	  </thead>
+	  <tbody>
+        {% for k in all_clients %}
+  		<tr>
+			<td>{{k.id}}</td>
+			<td><a href="{{url_for('show_history', id=k.id)}}">{{k.name}}</a></td>
+			<td>{{k.phone_number}}</td>
+			<td>{{k.email}}</td>
+		  	<td>
+		  <a class="btn btn-primary" href="{{url_for('edit_client', id=k.id)}}">Изменить<i class="bi bi-pencil-square"></i></a>
+		  <a class="btn btn-danger" href="{{url_for('delete_client', id=k.id)}}">Удалить <i class="bi bi-trash"></i></a>
+			</td>
+		</tr>
+        {% endfor %}
+	  </tbody>
+	</table>
+
+	<a class="btn btn-primary" href="{{ url_for('add_clients') }}">Добавить клиента</a>
+
+	
+{% endblock %}

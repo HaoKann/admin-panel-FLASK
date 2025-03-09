@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Страница клиента: {{client.name}}</h1>
+<p>Номер телефона:  <a href="tel:{{client.phone_number}}">{{client.phone_number}}</a></p>
+<p>Почта: <a href="mailto:{{client.email}}">{{client.email}}</a></p>
+<h3>История покупок</h3>
+
+<ol class="list-group list-group-numbered">
+    {% for order in client.orders.all() %}
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold"><a href="{{url_for('order_details', id=order.id)}}">Заказ с номером {{order.id}}</a></div>
+          Дата заказа: {{order.date}}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+
+
+{% endblock %}

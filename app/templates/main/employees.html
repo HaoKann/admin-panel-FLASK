@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Сотрудники</h1>
+	<table class="table {% if request.cookies.get('theme') == 'dark' %} table-dark {% endif %} table-striped">
+	  <thead>
+  		<tr>
+  		  <th>#</th>
+  		  <th>Имя сотрудника </th>
+  		  <th>Фамилия сотрудника</th>
+          <th>Дата рождения</th>
+		  <th>Адрес</th>
+          <th>Зарплата</th>
+		  <th>Действие</th>
+  		</tr>
+	  </thead>
+	  <tbody>
+        {% for e in all_employees %}
+  		<tr>
+  		  <td>{{e.id}}</td>
+  		  <td>{{e.name}}</td>
+          <td>{{e.surname}}</td>
+          <td>{{e.date_of_birth}}</td>
+          <td>{{e.address}}</td>
+          <td>{{e.salary}}</td>
+		  <td>
+			<a class="btn btn-primary" href="{{url_for('change_employee', id=e.id)}}">Изменить сотрудника <i class="bi bi-pencil-square"></i> </a>
+			<a class="btn btn-danger" href="{{url_for('delete_employee', id=e.id)}}">Удалить сотрудника <i class="bi bi-trash"></i> </a>
+		</td>
+  		</tr>
+		
+        {% endfor %}
+	  </tbody>
+	</table>
+
+<a class="btn btn-primary" href="{{ url_for('add_employee') }}">Добавить сотрудника</a>
+
+
+{% endblock %}

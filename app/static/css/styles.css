@@ -1,0 +1,57 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-size: cover; /* Растягивает фон на весь экран */
+}
+
+
+  .navbar {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(10px);
+}
+
+
+.navbar .nav-link {
+  color:#ffffff !important;
+}
+  body {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .container {
+	flex: 1; 
+  }
+
+  .user-info {
+    display: flex; /* Размещаем элементы в строку */
+    align-items: center; /* Выравниваем элементы по центру */
+    justify-content: space-between; /* Максимальное расстояние между элементами */
+    gap: 5px; /* Отступ между текстом и фото */
+}
+
+.user-details {
+    flex: 1; /* Текст занимает всё доступное место */
+}
+
+  img {
+    max-width: 100%; /* Адаптивность: картинка не выйдет за границы контейнера */
+    height: auto; /* Сохраняет пропорции */
+    display: inline-block; /* Убирает лишние отступы */
+  }
+
+  .avatar {
+    width: 150px; /* Фиксированная ширина */
+    height: 150px; /* Фиксированная высота */
+    object-fit: cover; /* Обрезает изображение, чтобы оно заполняло контейнер */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Тень для красоты */
+    margin-right: 650px ;
+  }
+
+  .small-avatar{
+    width: 50px; /* Фиксированная ширина */
+    height: 50px; /* Фиксированная высота */
+    object-fit: cover; /* Обрезает изображение, чтобы оно заполняло контейнер */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Тень для красоты */
+  }

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Необработанные обращения</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Обработанные обращения</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        {% for a in all_appeals if a.processed_or_not == False %}
+            <div>
+                <h3>{{a.type_of_question}}</h3>
+                <p>{{a.question}}</p>
+                <p>{{a.name}} - {{a.email_for_reply}} - {{a.date_of_appeal}}</p>
+                <a href="{{ url_for('show_appeal', id=a.id) }}">Обработать</a>
+                <hr>
+            </div>
+            {% else %}
+            <div class="alert alert-success">Все обращения обработаны</div>
+        {% endfor %}
+    </div>
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        {% for a in all_appeals if a.processed_or_not == True %}
+        <div>
+            <h3>{{a.type_of_question}}</h3>
+            <p>{{a.question}}</p>
+            <p>{{a.name}} - {{a.email_for_reply}} - {{a.date_of_appeal}}</p>
+            <p>Ответ от модерации: <strong>{{a.respond}}</strong></p>
+            <hr>
+        </div>
+        {% else %}
+        <div class="alert alert-success">Нет обработанных обращений</div>
+    {% endfor %}
+    </div>
+  </div>
+
+
+{% endblock %}

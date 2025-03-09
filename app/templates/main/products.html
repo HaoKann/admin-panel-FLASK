@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Товары</h1>
+	<table class="table {% if request.cookies.get('theme') == 'dark' %} table-dark {% endif %} table-striped">
+	  <thead>
+  		<tr>
+  		  <th>#</th>
+  		  <th>Название товара </th>
+  		  <th>Тип товара</th>
+          <th>Количество товара</th>
+          <th>Цена товара</th>
+		  <th>Поставщик</th>
+		  <th>Действие</th>
+  		</tr>
+	  </thead>
+	  <tbody>
+        {% for p in all_products %}
+  		<tr>
+  		  <td>{{p.id}}</td>
+  		  <td>{{p.prod_name}}</td>
+          <td>{{p.prod_type}}</td>
+          <td>{{p.prod_amount}}</td>
+          <td>{{p.prod_price}}</td>
+		  <td><a href="{{url_for('sup_details', id=p.supplier.id)}}">{{p.supplier.sup_name}}</a></td>
+		  <td>
+			<a class="btn btn-primary" href="{{url_for('change_product', id=p.id)}}">Изменить<i class="bi bi-pencil-square"></i></a>
+			<a class="btn btn-danger" href="{{url_for('delete_product', id=p.id)}}">Удалить<i class="bi bi-trash"></i></a>
+		  </td>
+  		</tr>
+        {% endfor %}
+	  </tbody>
+	</table>
+
+<a class="btn btn-primary" href="{{ url_for('add_products') }}">Добавить продукт</a>
+
+	
+{% endblock %}

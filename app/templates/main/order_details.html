@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<h1>Подробности о заказе</h1>
+
+<p>id заказа: {{order.id}}</p>
+<p>Описание: {{order.order_description}}</p>
+<p>Дата оформления: {{order.date}}</p>
+
+
+
+<table class="table {% if request.cookies.get('theme') == 'dark' %} table-dark {% endif %} table-striped">
+    <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Количество</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prod in order.products.all() %}
+        <tr>
+            <td>{{prod.product.prod_name}}</td>
+            <td>{{prod.amount}}</td>
+            <td> <a class="btn btn-primary" href="{{url_for('change_product_in_cart', id=prod.id)}}">Изменить <i class="bi bi-pencil-square"></i> </a>
+                 <a class="btn btn-danger"  href="{{ url_for('delete_product_in_cart', id=prod.id) }}">Удалить <i class="bi bi-trash"></i> </a>
+            </td>
+             
+            
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">Товаров в заказе нет</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+        
+</table>
+
+    <div class="row">
+        <div class="col-md-4">
+            {{ render_form(form) }}
+        </div>
+    </div>
+
+{% endblock %}

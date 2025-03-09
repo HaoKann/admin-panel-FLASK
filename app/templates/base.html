@@ -1,0 +1,123 @@
+{% from 'bootstrap5/utils.html' import render_messages %}
+{% from 'bootstrap5/form.html' import render_form %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            
+            {% block styles %}
+                {{ bootstrap.load_css() }}
+                <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" type="text/css"/>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+                <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon (1).ico') }}" type="image/x-icon">
+               
+                {% if request.cookies.get('theme') == 'dark' %}
+                  <link rel="stylesheet" href="{{ url_for('static', filename='css/dark.css' ) }}">
+                  
+                {% else %}
+                  <link rel="stylesheet" href="{{ url_for('static', filename='css/light.css') }}">
+                  
+                {% endif %}
+            {% endblock %}
+
+
+            {% block title %}	
+            <title>
+            {% if title %}
+                {{ title }}
+            {% else %}
+                Панель управления
+            {% endif %}
+            </title>
+            {% endblock %}
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{{url_for('main_page')}}">Панель управления</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('suppliers')}}">Поставщики</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('clients')}}">Клиенты</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('products')}}">Продукты</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('employee')}}">Сотрудники</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('orders')}}">Заказы</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('show_appeals')}}">Список обращений</a>
+                  </li>                       
+                  {% if current_user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('add_qa')}}">Добавить вопрос/ответ</a>
+                  </li>
+                  {% endif %}
+                </ul>
+
+                {{ render_form(g.theme_form, form_type='inline', action='/change-theme') }}
+
+                <ul class="navbar-nav ms-auto">
+                  {% if current_user.is_authenticated %}          
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('logout')}}">Выйти</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('show_userpage')}}">{{current_user.username}}
+                      {% if current_user.photo %}
+                        <img class="small-avatar" src="{{ url_for('static', filename= current_user.get_avatar() ) }}" alt="Фото пользователя">
+                      {% else %}
+                        <img class="small-avatar" src="{{ url_for('static', filename='avatars/default_avatar.jpg' ) }}" alt="Фото пользователя по умолчанию">
+                      {% endif %}
+                    </a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('registration')}}">Зарегестрироваться</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('login')}}">Войти</a>
+                  </li>            
+                  {% endif %}
+
+                </ul>
+              </div>
+            </div>
+          </nav>
+            <div class="container">
+                {{ render_messages() }}
+                {% block content %}
+                  
+                {% endblock %}
+
+            </div>
+
+
+        {% block scripts %}
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+    </body>
+
+  
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="{{ url_for('support_page') }}" class="nav-link px-2 text-body-secondary">Служба поддержки</a></li>
+        <li class="nav-item"><a href="{{ url_for('qa_page') }}" class="nav-link px-2 text-body-secondary">Частые вопросы</a></li>
+        <li class="nav-item"><a href="{{ url_for('about_page') }}" class="nav-link px-2 text-body-secondary">О сайте</a></li>
+    </ul>
+    
+      <p  class="copyright text-center text-body-secondary">© 2025 DevShelf, Inc</p>
+    </footer>
+</html>

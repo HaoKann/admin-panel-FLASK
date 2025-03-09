@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Страница пользователя</h1>
+
+
+<div class="user-info">
+    <div class="user-details">
+        <h5>Имя пользователя: {{ current_user.name }}</h5>
+        <h5>Почта: {{ current_user.email }}</h5>
+        <h5>Номер телефона: {{ current_user.phone_number }}</h5>
+        <h5>Дата регистрации: {{ current_user.created_on.strftime('%d.%m.%y %H:%M') }}</h5>
+        <h5>Дата обновления данных: {{ current_user.updated_on.strftime('%d.%m.%y %H:%M') }}</h5>
+    </div>
+
+    {% if current_user.photo %}
+            <img class="avatar" src="{{ url_for('static', filename= current_user.get_avatar() ) }}" alt="Фото пользователя">
+        {% else %}
+            <img class="avatar" src="{{ url_for('static', filename='avatars/default_avatar.jpg' ) }}" alt="Фото пользователя по умолчанию">
+        {% endif %}
+</div>
+
+
+<a class="btn btn-primary" href="{{ url_for('change_password') }}">Изменить пароль</a>
+<a class="btn btn-primary" href="{{ url_for('change_profile') }}">Изменить данные </a>
+
+{% endblock %}

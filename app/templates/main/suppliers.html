@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<h1>Поставщики</h1>
+	<table class="table {% if request.cookies.get('theme') == 'dark' %} table-dark {% endif %} table-striped">
+	  <thead>
+  		<tr>
+  		  <th>#</th>
+  		  <th>Имя</th>
+  		  <th>Адрес</th>
+          <th>Телефон</th>
+		  <th>Действие</th>
+		  
+  		</tr>
+	  </thead>
+	  <tbody>
+        {% for s in all_suppliers %}
+  		<tr>
+  		  <td>{{s.id}}</td>
+  		  <td>{{s.sup_name}}</td>
+          <td>{{s.address}}</td>
+          <td>{{s.phone_number}}</td>
+		  <td>
+			<a class="btn btn-primary" href="{{url_for('edit_suppliers', id=s.id)}}">Изменить <i class="bi bi-pencil-square"></i></a>
+			<a class="btn btn-danger" href="{{url_for('delete_suppliers', id=s.id)}}">Удалить <i class="bi bi-trash"></i></a>
+			<a class="btn btn-info" href="{{url_for('sup_details', id=s.id)}}">Подробнее <i class="bi bi-book"> </i></a>
+		   </td>
+  		</tr>
+        {% endfor %}
+	  </tbody>
+	</table>
+
+
+	<a class="btn btn-primary" href="{{ url_for('add_suppliers') }}"> Добавить поставщика </a>
+	
+	
+{% endblock %}

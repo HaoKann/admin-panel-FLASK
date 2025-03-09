@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Подробности о поставщика: {{sup_details.sup_name}}</h1>
+<h2>Товары:</h2>
+
+<table class="table {% if request.cookies.get('theme') == 'dark' %} table-dark {% endif %} table-striped">
+    <thead>
+        <tr>
+            <th>Название продукта</th>
+            <th>Тип продукта</th>
+            <th>Количество продукта</th>
+            <th>Цена продукта</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for product in sup_details.products.all() %}
+    <tr>
+        <td>{{product.prod_name}}</td>
+        <td>{{product.prod_type}}</td>
+        <td>{{product.prod_amount}}</td>
+        <td>{{product.prod_price}}</td>
+    </tr>
+
+    {% else %}
+
+    <tr>
+        <td colspan="4">Товаров нет</td>
+    </tr>
+
+{% endfor %}
+
+    </tbody>
+</table>
+
+
+<p> Адресс поставщика: {{sup_details.address}}</p>
+<p> Номер телефона поставщика: {{sup_details.phone_number}}</p>
+
+
+
+
+{% endblock %}

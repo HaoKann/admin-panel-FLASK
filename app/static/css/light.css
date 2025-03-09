@@ -1,0 +1,22 @@
+body {
+    background: linear-gradient(to bottom, #4b0082, #8b004b, rgba(0, 0, 0, 0));
+    background-attachment: fixed; 
+    color: white;
+}
+
+.nav-item a{
+    color: rgb(0, 0, 0);
+   
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+footer a.nav-link{
+    color: black !important;
+}
+
+footer .copyright{
+    color: black !important;
+}

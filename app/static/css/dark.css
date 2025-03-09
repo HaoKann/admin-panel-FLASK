@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(10px);
+}
+
+
+.navbar-brand {
+    color: white !important;
+}
+
+
+form select{
+    background-color: black !important;
+    color: white !important;
+}
+
+
+footer .nav-link{
+    color: white !important;
+}
+
+footer .copyright{
+    color: white !important;
+}
