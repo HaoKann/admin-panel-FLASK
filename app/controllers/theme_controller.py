@@ -1,7 +1,7 @@
 from app import app
 from flask import redirect, request, g, make_response
 from app.forms.theme_form import ChangeTheme
- 
+
 
 @app.before_request
 def add_theme_form():

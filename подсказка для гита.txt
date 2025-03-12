@@ -1,0 +1,10 @@
+файл .gitignore
+git
+git init
+git add -A
+git commit -m 'Init project'
+git config --global user.email baizhanovdamir@mail.ru
+git config --global user.name 'HaoKann'
+git commit -m 'Init project'
+git remote add origin https://github.com/HaoKann/admin-panel-FLASK.git 
+git push -u origin main 

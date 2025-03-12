@@ -43,26 +43,26 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('suppliers')}}">Поставщики</a>
+                    <a class="nav-link" href="{{url_for('suppliers')}}">Поставщики <i class="bi bi-person-down"></i></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('clients')}}">Клиенты</a>
+                    <a class="nav-link" href="{{url_for('clients')}}">Клиенты <i class="bi bi-people-fill"></i></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('products')}}">Продукты</a>
+                    <a class="nav-link" href="{{url_for('products')}}">Продукты <i class="bi bi-bag-plus-fill"></i></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('employee')}}">Сотрудники</a>
+                    <a class="nav-link" href="{{url_for('employee')}}">Сотрудники <i class="bi bi-person-fill-gear"></i></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('orders')}}">Заказы</a>
+                    <a class="nav-link" href="{{url_for('orders')}}">Заказы <i class="bi bi-list-ol"></i></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('show_appeals')}}">Список обращений</a>
+                    <a class="nav-link" href="{{url_for('show_appeals')}}">Список обращений <i class="bi bi-card-list"></i></a>
                   </li>                       
                   {% if current_user.is_authenticated %}
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('add_qa')}}">Добавить вопрос/ответ</a>
+                    <a class="nav-link" href="{{url_for('add_qa')}}">Добавить вопрос/ответ <i class="bi bi-question-circle"></i></a>
                   </li>
                   {% endif %}
                 </ul>
@@ -71,19 +71,27 @@
 
                 <ul class="navbar-nav ms-auto">
                   {% if current_user.is_authenticated %}          
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('logout')}}">Выйти</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('show_userpage')}}">{{current_user.username}}
-                      {% if current_user.photo %}
-                        <img class="small-avatar" src="{{ url_for('static', filename= current_user.get_avatar() ) }}" alt="Фото пользователя">
-                      {% else %}
-                        <img class="small-avatar" src="{{ url_for('static', filename='avatars/default_avatar.jpg' ) }}" alt="Фото пользователя по умолчанию">
-                      {% endif %}
-                    </a>
+      
+                <ul class="navbar-nav ms-auto">
+                  {% if current_user.is_authenticated %}          
+                  <li class="nav-item user-info d-flex align-items-center">
+                      <a class="nav-link d-flex align-items-center" href="{{ url_for('show_userpage') }}">
+                          <span class="me-2">Приветствую, {{ current_user.username }}!</span>
+                          <img class="small-avatar" src="{{ url_for('static', filename= current_user.get_avatar() if current_user.photo else 'avatars/default_avatar.jpg') }}" alt="Фото пользователя">
+                      </a>
+                      <a class="nav-link ms-2" href="{{ url_for('logout') }}">Выйти <i class="bi bi-box-arrow-in-left"></i></a>
                   </li>
                   {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('registration') }}">Зарегистрироваться</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('login') }}">Войти <i class="bi bi-box-arrow-in-right-cicle"></i>
+                      </a>
+                  </li>            
+                  {% endif %}
+              </ul>
+                {% else %}
                   <li class="nav-item">
                     <a class="nav-link" href="{{url_for('registration')}}">Зарегестрироваться</a>
                   </li>

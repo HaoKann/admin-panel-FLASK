@@ -27,7 +27,7 @@ html, body {
   .user-info {
     display: flex; /* Размещаем элементы в строку */
     align-items: center; /* Выравниваем элементы по центру */
-    justify-content: space-between; /* Максимальное расстояние между элементами */
+    justify-content: flex-end; /* Максимальное расстояние между элементами */
     gap: 5px; /* Отступ между текстом и фото */
 }
 
