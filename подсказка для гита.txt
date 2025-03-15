@@ -1,10 +1,19 @@
-файл .gitignore
-git
-git init
-git add -A
-git commit -m 'Init project'
-git config --global user.email baizhanovdamir@mail.ru
-git config --global user.name 'HaoKann'
-git commit -m 'Init project'
-git remote add origin https://github.com/HaoKann/admin-panel-FLASK.git 
-git push -u origin main 
+Перед загрузкой на гит хаб
+    файл .gitignore
+    git
+    git init
+    git add -A
+    git commit -m 'Init project'
+    git config --global user.email baizhanovdamir@mail.ru
+    git config --global user.name 'HaoKann'
+    git commit -m 'Init project'
+    git remote add origin https://github.com/HaoKann/admin-panel-FLASK.git 
+    git push -u origin main 
+
+После внесения изменений в проект
+git status Это покажет изменённые файлы и новые файлы, которые ещё не добавлены в отслеживание.
+git show
+git add . . означает добавить все изменённые и новые файлы
+git commit -m 'Changed main screen'
+git push origin main
+

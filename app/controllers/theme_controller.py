@@ -5,7 +5,7 @@ from app.forms.theme_form import ChangeTheme
 
 @app.before_request
 def add_theme_form():
-    g.theme_form = ChangeTheme()
+    g.theme_form = ChangeTheme(data={'chosen_theme':request.cookies.get('theme')})
     # g.theme_form.chosen_theme.default = request.cookies.get('theme')
     # g.theme_form.chosen_theme.process(formdata=None)
 
